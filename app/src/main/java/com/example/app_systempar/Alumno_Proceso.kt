@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import com.example.app_systempar.databinding.FragmentAlumnoProcesoBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +23,7 @@ class Alumno_Proceso : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var binding: FragmentAlumnoProcesoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +36,19 @@ class Alumno_Proceso : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alumno__proceso, container, false)
+        binding = FragmentAlumnoProcesoBinding.inflate(inflater, container, false)
+
+        val alumno = Solicitud("EDUARDO DÁVILA CAMPOS","ÁLGEBRA","laloquera@gmail.com","449-920-5022")
+        val alumno2 = Solicitud("EDUARDO DÁVILA CAMPOS","ESTRUCTURA DE DATOS","laloquera@gmail.com","449-920-5022")
+        val alumno3 = Solicitud("EDUARDO DÁVILA CAMPOS","CÁLCULO INTEGRAL","laloquera@gmail.com","449-920-5022")
+        val listaAlumnos = listOf(alumno,alumno2,alumno3)
+        val adapter = AlumnosAdapter(requireContext(),listaAlumnos)
+        binding.alumnos.adapter = adapter
+        //return inflater.inflate(R.layout.fragment_alumno__proceso, container, false)
+        return binding.root
     }
 
     companion object {

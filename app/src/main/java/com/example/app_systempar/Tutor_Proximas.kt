@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.app_systempar.databinding.FragmentAlumnoProcesoBinding
 import com.example.app_systempar.databinding.FragmentAlumnoProximasBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -15,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Alumno_Proximas.newInstance] factory method to
+ * Use the [Tutor_Proximas.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Alumno_Proximas : Fragment() {
+class Tutor_Proximas : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -43,7 +42,7 @@ class Alumno_Proximas : Fragment() {
         val alumno2 = Solicitud("EDUARDO DÁVILA CAMPOS","ESTRUCTURA DE DATOS","laloquera@gmail.com","449-920-5022")
         val alumno3 = Solicitud("EDUARDO DÁVILA CAMPOS","CÁLCULO INTEGRAL","laloquera@gmail.com","449-920-5022")
         val listaAlumnos = listOf(alumno,alumno2,alumno3)
-        val adapter = AlumnosAdapter(requireContext(),listaAlumnos)
+        val adapter = Adaptador_Tutor(requireContext(),listaAlumnos,"PRÓXIMAS")
         binding.alumnos.adapter = adapter
         //return inflater.inflate(R.layout.fragment_alumno__proceso, container, false)
         return binding.root
@@ -57,12 +56,12 @@ class Alumno_Proximas : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Alumno_Proximas.
+         * @return A new instance of fragment Tutor_Proximas.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Alumno_Proximas().apply {
+            Tutor_Proximas().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
