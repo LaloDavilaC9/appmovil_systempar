@@ -1,13 +1,16 @@
 package com.example.app_systempar
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 import androidx.viewpager2.widget.ViewPager2
+import com.example.app_systempar.databinding.ActivityVistaAlumnoBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -16,10 +19,15 @@ import com.google.android.material.tabs.TabLayoutMediator
 class Vista_Alumno : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
+    //private lateinit var binding: ActivityVistaAlumnoBinding
+    private lateinit var botonCambio : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vista_alumno)
 
+        //binding = ActivityVistaAlumnoBinding.inflate(layoutInflater)
+        //setContentView(binding.root)
         tabLayout = findViewById(R.id.tab_menu)
         viewPager = findViewById(R.id.contenedor_fragmentos)
 
@@ -32,6 +40,12 @@ class Vista_Alumno : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = adapter.getTitle(position)
         }.attach()
+
+        botonCambio = findViewById(R.id.btn_cambio_vista)
+        botonCambio.setOnClickListener{
+            val intent = Intent(this,Vista_Tutor::class.java)
+            startActivity(intent)
+        }
     }
 
 }

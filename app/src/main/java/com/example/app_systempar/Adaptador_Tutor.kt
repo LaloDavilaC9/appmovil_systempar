@@ -22,7 +22,7 @@ class Adaptador_Tutor(private val mContext: Context, private val listaProductos:
         // binding.txtCorreo.text = alumno.correo
         binding.txtMateria.text = alumno.materia
 
-        if(texto == "PROXIMAS"){
+        if(texto == "PRÓXIMAS"){
             binding.btnConfirmar.isVisible = false
         }
         else{
