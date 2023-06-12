@@ -17,6 +17,14 @@ interface APIService {
      @GET
      suspend fun login(@Url url: String) : Response<AlumnoResponse>
 
+     @GET
+     suspend fun solicitudesMaterias(@Url url : String ) : Response<MateriasResponse>
+
+     @POST("/realizarSolicitud")
+     suspend fun realizarSolicitud(@Body requestBody: RequestBody) : Response<ResponseBody>
+
+
+
 
 
     //Usuarios

@@ -13,7 +13,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.app_systempar.databinding.ActivityVistaAlumnoBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
 
 class Vista_Alumno : AppCompatActivity() {
@@ -21,12 +24,13 @@ class Vista_Alumno : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     //private lateinit var binding: ActivityVistaAlumnoBinding
     private lateinit var botonCambio : Button
-
+    private val met = Metodos()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vista_alumno)
 
-        //binding = ActivityVistaAlumnoBinding.inflate(layoutInflater)
+
+        //binding = ActivityVistaAlumnoB$inding.inflate(layoutInflater)
         //setContentView(binding.root)
         tabLayout = findViewById(R.id.tab_menu)
         viewPager = findViewById(R.id.contenedor_fragmentos)
@@ -48,7 +52,10 @@ class Vista_Alumno : AppCompatActivity() {
         }
     }
 
+
 }
+
+
 
 class MyPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
 

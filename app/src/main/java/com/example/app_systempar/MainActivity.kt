@@ -1,5 +1,6 @@
 package com.example.app_systempar
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                 if(info.array.size > 0){
                     if(info.array[0].alumno_contrasena == txtContrasena.text.toString()){
                         println("Inicio correcto")
+                        AlumnoManager.alumnoResponse = info
+
+
+
                         val intent = Intent(applicationContext, Vista_Alumno::class.java)
                         startActivity(intent)
                     }
@@ -52,8 +57,15 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }catch (e: Exception){
-
+                println(e)
             }
+
+
+            //val sharedPreferences = this@MainActivity.getSharedPreferences("Datos_Alumno", Context.MODE_PRIVATE)
+
+            // val editor = sharedPreferences.edit()
+            //editor.putString("id_alumno", "valor")
+            //editor.apply()
             /*if(info.array.size > 0){
                 println("Compara ${info.array[0].password} VS ${txtContrasena.text.toString()}")
                 if(info.array[0].password == txtContrasena.text.toString()){
