@@ -155,17 +155,18 @@ class Alumno_Solicitud : Fragment() {
         if (infoAlumno != null) {
             val array = infoAlumno.array
             if (array.isNotEmpty()) {
-                jsonObject.put("solicitud_fecha",dateFormat.format(calendar.time))
-                jsonObject.put("solicitud_urgencia",urgencia[0])
-                jsonObject.put("materia_id",materias[materiaSeleccionada].materia_id)
-                jsonObject.put("solicitud_tema",tema)
-                jsonObject.put("solicitud_descripcion",descripcion)
-                jsonObject.put("solicitud_modalidad",modalidad)
-                jsonObject.put("solicitud_vigente",0)
+                jsonObject.put("solicitud_fecha", dateFormat.format(calendar.time))
+                jsonObject.put("solicitud_urgencia", urgencia[0])
+                jsonObject.put("materia_id", materias[materiaSeleccionada].materia_id)
+                jsonObject.put("solicitud_tema", tema)
+                jsonObject.put("solicitud_descripcion", descripcion)
+                jsonObject.put("solicitud_modalidad", modalidad)
+                jsonObject.put("solicitud_vigente", 0)
+                jsonObject.put("alumno_id", array[0].alumno_id)
 
                 //Se convierte el objeto Json a String
                 var jsonString = jsonObject.toString()
-                println("DATOS: "+jsonString)
+                println("DATOS: " + jsonString)
                 //planId = array[0].plan_id
                 //semestre = array[0].alumno_semestre
                 //println("Nombre del alumno: $nombreAlumno")
@@ -190,13 +191,15 @@ class Alumno_Solicitud : Fragment() {
                             )
                             Log.d("Pretty Printed JSON :", prettyJson)
                             println("LOGRADO")
+
                         }
                     }
                 }
             }
         }
-
     }
+
+
 
     fun cargarMaterias() {
         spinnerMaterias = rootView.findViewById(R.id.txtin_materia)
