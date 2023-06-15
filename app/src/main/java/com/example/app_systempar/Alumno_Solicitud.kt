@@ -2,16 +2,21 @@ package com.example.app_systempar
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatSpinner
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import org.w3c.dom.Text
 import retrofit2.Response
@@ -40,6 +45,9 @@ class Alumno_Solicitud : Fragment() {
     private  var materia : String = ""
     private  var urgencia : String = ""
     private  var modalidad : String = ""
+    private var materiaSeleccionada : Int = 0
+    private lateinit var id_materias : List<Int>
+    private lateinit var materias : List<MateriaObject>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,6 +83,7 @@ class Alumno_Solicitud : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 // Obtener la opción seleccionada
                 materia = parent.getItemAtPosition(position).toString()
+                materiaSeleccionada = position
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -86,6 +95,12 @@ class Alumno_Solicitud : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 // Obtener la opción seleccionada
                 modalidad = parent.getItemAtPosition(position).toString()
+                if(modalidad == "EN LÍNEA"){
+                    modalidad = "L"
+                }
+                else{
+                    modalidad = "P"
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -142,11 +157,42 @@ class Alumno_Solicitud : Fragment() {
             if (array.isNotEmpty()) {
                 jsonObject.put("solicitud_fecha",dateFormat.format(calendar.time))
                 jsonObject.put("solicitud_urgencia",urgencia[0])
-                jsonObject.put("materia_id",dateFormat.format(calendar.time))
-                planId = array[0].plan_id
-                semestre = array[0].alumno_semestre
+                jsonObject.put("materia_id",materias[materiaSeleccionada].materia_id)
+                jsonObject.put("solicitud_tema",tema)
+                jsonObject.put("solicitud_descripcion",descripcion)
+                jsonObject.put("solicitud_modalidad",modalidad)
+                jsonObject.put("solicitud_vigente",0)
+
+                //Se convierte el objeto Json a String
+                var jsonString = jsonObject.toString()
+                println("DATOS: "+jsonString)
+                //planId = array[0].plan_id
+                //semestre = array[0].alumno_semestre
                 //println("Nombre del alumno: $nombreAlumno")
 
+                val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
+                val retrofit = met.getRetrofit()
+
+
+                val service = retrofit.create(APIService::class.java)
+                CoroutineScope(Dispatchers.IO).launch {
+
+                    val response = service.realizarSolicitud(requestBody)
+                    withContext(Dispatchers.Main) {
+                        //El siguiente IF controla si se pudo conectar a la API o no
+                        if (response.isSuccessful) {
+                            // Convert raw JSON to pretty JSON using GSON library
+                            val gson = GsonBuilder().setPrettyPrinting().create()
+                            val prettyJson = gson.toJson(
+                                JsonParser.parseString(
+                                    response.body()?.string()
+                                )
+                            )
+                            Log.d("Pretty Printed JSON :", prettyJson)
+                            println("LOGRADO")
+                        }
+                    }
+                }
             }
         }
 
@@ -173,10 +219,10 @@ class Alumno_Solicitud : Fragment() {
                     met.getRetrofit().create(APIService::class.java)
                         .solicitudesMaterias("/solicitudes/${planId}/${semestre}")
                 val info = call.body() as MateriasResponse
-                val materias = info.array
+                materias = info.array
 
                 val nombresMaterias = materias.map { it.materia_nombre }
-
+                id_materias = materias.map {it.materia_id}
                 withContext(Dispatchers.Main) {
                     val adapter = ArrayAdapter(
                         requireContext(),

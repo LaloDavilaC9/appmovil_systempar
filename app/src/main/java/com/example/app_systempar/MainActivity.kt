@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }catch (e: Exception){
+                println("entra")
                 println(e)
             }
 
