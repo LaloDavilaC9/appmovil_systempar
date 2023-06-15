@@ -23,7 +23,7 @@ interface APIService {
      @POST("/nuevaSolicitud")
      suspend fun realizarSolicitud(@Body requestBody: RequestBody) : Response<ResponseBody>
 
-   
+
 
 
 
