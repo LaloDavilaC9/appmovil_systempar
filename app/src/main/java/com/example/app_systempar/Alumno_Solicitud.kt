@@ -1,5 +1,6 @@
 package com.example.app_systempar
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -48,6 +49,9 @@ class Alumno_Solicitud : Fragment() {
     private var materiaSeleccionada : Int = 0
     private lateinit var id_materias : List<Int>
     private lateinit var materias : List<MateriaObject>
+    private var alumnoProcesoListener: AlumnoProcesoListener? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -191,14 +195,19 @@ class Alumno_Solicitud : Fragment() {
                             )
                             Log.d("Pretty Printed JSON :", prettyJson)
                             println("LOGRADO")
-
+                            alumnoProcesoListener?.onSolicitudActualizada()
+                            Toast.makeText(requireContext(), "¡Solicitud realizada!", Toast.LENGTH_LONG).show()
+                            //Limpiando datos
+                            var elemento = rootView.findViewById<TextView?>(R.id.txtin_tema)
+                            elemento.text = ""
+                            elemento = rootView.findViewById<TextView?>(R.id.txtin_descripcion)
+                            elemento.text = ""
                         }
                     }
                 }
             }
         }
     }
-
 
 
     fun cargarMaterias() {
@@ -240,4 +249,17 @@ class Alumno_Solicitud : Fragment() {
             }
         }
     }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is AlumnoProcesoListener) {
+            alumnoProcesoListener = context
+        } else {
+            throw RuntimeException("$context debe implementar AlumnoProcesoListener")
+        }
+    }
+
+}
+
+interface AlumnoProcesoListener {
+    fun onSolicitudActualizada()
 }

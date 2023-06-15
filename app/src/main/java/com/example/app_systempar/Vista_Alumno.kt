@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 
-class Vista_Alumno : AppCompatActivity() {
+class Vista_Alumno : AppCompatActivity(), AlumnoProcesoListener {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     //private lateinit var binding: ActivityVistaAlumnoBinding
@@ -52,7 +52,11 @@ class Vista_Alumno : AppCompatActivity() {
         }
     }
 
-
+    override fun onSolicitudActualizada() {
+        // Aquí puedes actualizar el fragmento Alumno_Proceso
+        val alumnoProcesoFragment = supportFragmentManager.findFragmentByTag("Alumno_Proceso") as Alumno_Proceso?
+        alumnoProcesoFragment?.cargarSolicitudesEnProceso()
+    }
 }
 
 

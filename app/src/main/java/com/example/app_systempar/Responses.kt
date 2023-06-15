@@ -33,3 +33,17 @@ data class MateriaObject(
 )
 
 data class MateriasResponse(@SerializedName("array") var array: List<MateriaObject>, @SerializedName("success") var success: Boolean)
+
+data class SolicitudInfo(
+    val materia_nombre: String,
+    val tutor_nombre_completo: String?,
+    val alumno_telefono: String?,
+    val alumno_correo: String?,
+    val solicitud_descripcion: String,
+    val solicitud_tema: String,
+    val solicitud_modalidad: String,
+    val solicitud_lugar: String?,
+    val solicitud_urgencia: String,
+    val solicitud_fecha_programacion : String?
+) : java.io.Serializable
+data class SolicitudResponse(@SerializedName("array") var array: List<SolicitudInfo>, @SerializedName("success") var success: Boolean) : java.io.Serializable
