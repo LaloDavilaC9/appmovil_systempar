@@ -32,6 +32,7 @@ class AlumnosAdapter(private val mContext: Context, private val listaSolicitudes
         binding.btnConfirmar.setOnClickListener {
             val intent = Intent(mContext, AlumnoDetalles::class.java)
             intent.putExtra("info", alumno)
+            intent.putExtra("viene","alumno")
 
             mContext.startActivity(intent)
         }

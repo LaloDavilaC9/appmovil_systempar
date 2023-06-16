@@ -18,8 +18,8 @@ data class AlumnoObject(
     val alumno_telefono: String,
     val alumno_correo: String,
     val alumno_contrasena: String,
-    val alumno_imagen: AlumnoImagen
-
+    val alumno_imagen: AlumnoImagen,
+    val tutor_id : Int?
 )
 
 data class AlumnoResponse (@SerializedName("array") var array:List<AlumnoObject>, @SerializedName("success") var success: Boolean)

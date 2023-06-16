@@ -12,9 +12,14 @@ class AlumnoDetalles : AppCompatActivity() {
         binding = ActivityAlumnoDetallesBinding.inflate(layoutInflater)
         val view = binding.root
         val solicitudInfo = intent.getSerializableExtra("info") as SolicitudInfo
+        val viene  = intent.getStringExtra("viene") as String
+
+        if(viene == "alumno"){
+            binding.txtTutor.text = "DATOS DEL ALUMNO"
+        }
 
         if(solicitudInfo.tutor_nombre_completo != null){
-            binding.txtInfoTutor.layoutParams.height = 200
+            binding.txtInfoTutor.layoutParams.height = 250
             binding.txtInfoTutor.text = "Nombre: ${solicitudInfo.tutor_nombre_completo}\n " +
                     "Correo: ${solicitudInfo.alumno_correo}\n" +
                     "Teléfono: ${solicitudInfo.alumno_telefono}\n"
