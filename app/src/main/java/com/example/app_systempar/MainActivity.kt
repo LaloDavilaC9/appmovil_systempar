@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,16 +43,15 @@ class MainActivity : AppCompatActivity() {
                 //println("Compara ${info.array[0].alumno_contrasena} VS ${txtContrasena.text.toString()}")
                 if(info.array.size > 0){
                     if(info.array[0].alumno_contrasena == txtContrasena.text.toString()){
-                        println("Inicio correcto")
+                        //println("Inicio correcto")
                         AlumnoManager.alumnoResponse = info
-
-
 
                         val intent = Intent(applicationContext, Vista_Alumno::class.java)
                         startActivity(intent)
                     }
                     else{
-                        println("Inicio INCORRECTO")
+                        Toast.makeText(getApplicationContext(), "Información incorrecta, vuelva a intentarlo", Toast.LENGTH_SHORT).show();
+
                     }
 
                 }

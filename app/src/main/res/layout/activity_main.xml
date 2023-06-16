@@ -9,29 +9,30 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="336dp"
-        android:layout_height="185dp"
-        android:layout_marginTop="116dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="232dp"
         android:fontFamily="casual"
-        android:text="INICIO DE SESIÓN"
+        android:text="STP"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
-        android:textSize="60sp"
+        android:textSize="96sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/txtin_ID"
         android:layout_width="334dp"
         android:layout_height="54dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="INGRESA TU ID"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -39,20 +40,20 @@
         android:id="@+id/txtin_contrasena"
         android:layout_width="334dp"
         android:layout_height="54dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="INGRESA TU CONTRASEÑA"
-        android:inputType="textPersonName"
+        android:inputType="textWebEditText|textPhonetic|textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txtin_ID" />
 
     <Button
         android:id="@+id/btn_entrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:background="#3F51B5"
         android:text="ENTRAR"
         android:textColor="#FFFFFF"
@@ -60,5 +61,14 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtin_contrasena" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="143dp"
+        android:layout_height="264dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gallouaa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
