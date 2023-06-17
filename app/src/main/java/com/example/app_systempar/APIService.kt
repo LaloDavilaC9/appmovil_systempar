@@ -38,9 +38,14 @@ interface APIService {
      @POST("/nuevaSolicitud")
      suspend fun realizarSolicitud(@Body requestBody: RequestBody) : Response<ResponseBody>
 
+     @POST("/aceptarSolicitud")
+     suspend fun aceptarSolicitud(@Body requestBody: RequestBody) : Response<ResponseBody>
 
+     @POST("/cancelarSolicitud")
+     suspend fun cancelarSolicitud(@Body requestBody: RequestBody) : Response<ResponseBody>
 
-
+     @POST("/programarSolicitud")
+     suspend fun programarSolicitud(@Body requestBody: RequestBody) : Response<ResponseBody>
 
      //Usuarios
     /*@GET

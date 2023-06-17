@@ -35,6 +35,7 @@ data class MateriaObject(
 data class MateriasResponse(@SerializedName("array") var array: List<MateriaObject>, @SerializedName("success") var success: Boolean)
 
 data class SolicitudInfo(
+    val solicitud_id : Int,
     val materia_nombre: String,
     val tutor_nombre_completo: String?,
     val alumno_telefono: String?,

@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Vista_Tutor">
+
+    <Button
+        android:id="@+id/btn_cerrarSesion2"
+        android:layout_width="43dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_baseline_exit_to_app_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_menu"
         android:layout_width="398dp"
@@ -69,7 +81,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/cambio"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintHorizontal_bias="0.648"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent" />
 

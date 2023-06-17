@@ -96,9 +96,9 @@ class Tutor_Proceso : Fragment() {
                         .solicitudesEnProcesoTutor("/enProcesoTutor/${id}")
                 val info = call.body() as SolicitudResponse
                 var solicitudes : List<SolicitudInfo> = info.array
-                println("LLEGA BIEN")
+                //println("LLEGA BIEN")
                 withContext(Dispatchers.Main) {
-                    val adapter = AlumnosAdapter(requireContext(),solicitudes)
+                    val adapter = Adaptador_Tutor(requireContext(),solicitudes, "EN PROCESO")
                     binding.tutores.adapter = adapter
                     binding.txtAvisoProceso2.isVisible = if (solicitudes.size == 0) true else false
                 }

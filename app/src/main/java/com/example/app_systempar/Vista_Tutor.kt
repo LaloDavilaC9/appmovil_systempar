@@ -10,11 +10,12 @@ import com.example.app_systempar.databinding.ActivityVistaTutorBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class Vista_Tutor : AppCompatActivity() {
+class Vista_Tutor : AppCompatActivity(), TutorSolicitudListener{
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     //private lateinit var binding: ActivityVistaTutorBinding
     private lateinit var botonCambio : Button
+    private lateinit var botonSalir : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //binding = ActivityVistaTutorBinding.inflate(layoutInflater)
@@ -25,9 +26,11 @@ class Vista_Tutor : AppCompatActivity() {
         viewPager = findViewById(R.id.contenedor_fragmentos)
 
         val adapter = MyPagerAdapter(supportFragmentManager, lifecycle)
+
         adapter.addFragment(Tutor_Solicitud(), "Solicitudes")
         adapter.addFragment(Tutor_Proceso(), "En proceso")
         adapter.addFragment(Tutor_Proximas(), "Próximas")
+
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -39,5 +42,17 @@ class Vista_Tutor : AppCompatActivity() {
             val intent = Intent(this,Vista_Alumno::class.java)
             startActivity(intent)
         }
+
+        botonSalir = findViewById(R.id.btn_cerrarSesion2)
+        botonSalir.setOnClickListener {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onSolicitudActualizada() {
+        // Aquí puedes actualizar el fragmento Alumno_Proceso
+        val tutorSolicitudFragment = supportFragmentManager.findFragmentByTag("Tutor_Solicitud") as Tutor_Solicitud?
+        tutorSolicitudFragment?.cargarSolicitudes()
     }
 }

@@ -165,7 +165,7 @@ class Alumno_Solicitud : Fragment() {
                 jsonObject.put("solicitud_tema", tema)
                 jsonObject.put("solicitud_descripcion", descripcion)
                 jsonObject.put("solicitud_modalidad", modalidad)
-                jsonObject.put("solicitud_vigente", 0)
+                jsonObject.put("solicitud_vigente", 1)
                 jsonObject.put("alumno_id", array[0].alumno_id)
 
                 //Se convierte el objeto Json a String

@@ -33,58 +33,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun verificarSesion(){
-
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val call: Response<AlumnoResponse> = met.getRetrofit().create(APIService::class.java).login("/login/${txtID.text.toString()}")
                 val info = call.body() as AlumnoResponse
-
-                //println("Recibe: $info")
-                //println("Compara ${info.array[0].alumno_contrasena} VS ${txtContrasena.text.toString()}")
                 if(info.array.size > 0){
                     if(info.array[0].alumno_contrasena == txtContrasena.text.toString()){
-                        //println("Inicio correcto")
                         AlumnoManager.alumnoResponse = info
-
                         val intent = Intent(applicationContext, Vista_Alumno::class.java)
                         startActivity(intent)
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Información incorrecta, vuelva a intentarlo", Toast.LENGTH_SHORT).show();
-
                     }
-
                 }
-
             }catch (e: Exception){
-                println("entra")
                 println(e)
             }
-
-
-            //val sharedPreferences = this@MainActivity.getSharedPreferences("Datos_Alumno", Context.MODE_PRIVATE)
-
-            // val editor = sharedPreferences.edit()
-            //editor.putString("id_alumno", "valor")
-            //editor.apply()
-            /*if(info.array.size > 0){
-                println("Compara ${info.array[0].password} VS ${txtContrasena.text.toString()}")
-                if(info.array[0].password == txtContrasena.text.toString()){
-                    println("Inicio correcto")
-
-                    val intent = Intent(applicationContext, Vista_Alumno::class.java)
-                    //intent.putExtra("correoHost",txtCorreo.text.toString())
-                    startActivity(intent)
-
-                }
-                else{
-                    println("Inicio INCORRECTO")
-                }
-            }*/
         }
     }
-
-
 }
+
+
+
+//val sharedPreferences = this@MainActivity.getSharedPreferences("Datos_Alumno", Context.MODE_PRIVATE)
+
+// val editor = sharedPreferences.edit()
+//editor.putString("id_alumno", "valor")
+//editor.apply()
+/*if(info.array.size > 0){
+    println("Compara ${info.array[0].password} VS ${txtContrasena.text.toString()}")
+    if(info.array[0].password == txtContrasena.text.toString()){
+        println("Inicio correcto")
+
+        val intent = Intent(applicationContext, Vista_Alumno::class.java)
+        //intent.putExtra("correoHost",txtCorreo.text.toString())
+        startActivity(intent)
+
+    }
+    else{
+        println("Inicio INCORRECTO")
+    }
+}*/
 
 

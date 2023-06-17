@@ -24,6 +24,7 @@ class Vista_Alumno : AppCompatActivity(), AlumnoProcesoListener {
     private lateinit var viewPager: ViewPager2
     //private lateinit var binding: ActivityVistaAlumnoBinding
     private lateinit var botonCambio : Button
+    private lateinit var botonSalir : Button
     private val met = Metodos()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,13 @@ class Vista_Alumno : AppCompatActivity(), AlumnoProcesoListener {
             val intent = Intent(this,Vista_Tutor::class.java)
             startActivity(intent)
         }
+
+        botonSalir = findViewById(R.id.btn_cerrarSesion)
+        botonSalir.setOnClickListener {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onSolicitudActualizada() {
