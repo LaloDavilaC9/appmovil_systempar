@@ -44,7 +44,9 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "Información incorrecta, vuelva a intentarlo", Toast.LENGTH_SHORT).show();
+                        runOnUiThread {
+                            Toast.makeText(applicationContext, "Información incorrecta, vuelva a intentarlo", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }catch (e: Exception){

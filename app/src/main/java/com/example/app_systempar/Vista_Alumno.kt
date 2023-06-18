@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -17,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.sql.Types.NULL
 
 
 class Vista_Alumno : AppCompatActivity(), AlumnoProcesoListener {
@@ -47,6 +49,13 @@ class Vista_Alumno : AppCompatActivity(), AlumnoProcesoListener {
         }.attach()
 
         botonCambio = findViewById(R.id.btn_cambio_vista)
+        val infoAlumno = AlumnoManager.alumnoResponse
+        val array = infoAlumno?.array
+
+        if(array?.get(0)?.tutor_id == NULL){
+            botonCambio.isVisible = false
+        }
+
         botonCambio.setOnClickListener{
             val intent = Intent(this,Vista_Tutor::class.java)
             startActivity(intent)

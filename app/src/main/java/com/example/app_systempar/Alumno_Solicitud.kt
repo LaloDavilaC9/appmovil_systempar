@@ -171,9 +171,6 @@ class Alumno_Solicitud : Fragment() {
                 //Se convierte el objeto Json a String
                 var jsonString = jsonObject.toString()
                 println("DATOS: " + jsonString)
-                //planId = array[0].plan_id
-                //semestre = array[0].alumno_semestre
-                //println("Nombre del alumno: $nombreAlumno")
 
                 val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
                 val retrofit = met.getRetrofit()
@@ -195,13 +192,16 @@ class Alumno_Solicitud : Fragment() {
                             )
                             Log.d("Pretty Printed JSON :", prettyJson)
                             println("LOGRADO")
-                            alumnoProcesoListener?.onSolicitudActualizada()
+                            //alumnoProcesoListener?.onSolicitudActualizada()
                             Toast.makeText(requireContext(), "¡Solicitud realizada!", Toast.LENGTH_LONG).show()
                             //Limpiando datos
                             var elemento = rootView.findViewById<TextView?>(R.id.txtin_tema)
                             elemento.text = ""
                             elemento = rootView.findViewById<TextView?>(R.id.txtin_descripcion)
                             elemento.text = ""
+
+                            val intent = Intent(requireContext(), Vista_Alumno::class.java)
+                            startActivity(intent)
                         }
                     }
                 }
@@ -221,8 +221,7 @@ class Alumno_Solicitud : Fragment() {
             if (array.isNotEmpty()) {
                 planId = array[0].plan_id
                 semestre = array[0].alumno_semestre
-                //println("Nombre del alumno: $nombreAlumno")
-
+                //println("Nombre del alumno: $nombreAlumno")3
             }
         }
         CoroutineScope(Dispatchers.IO).launch {
