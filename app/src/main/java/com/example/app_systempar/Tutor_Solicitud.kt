@@ -30,7 +30,6 @@ class Tutor_Solicitud : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentTutorSolicitudBinding
     private val met = Metodos()
-    private var tutorSolicitudListener: TutorSolicitudListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,15 +113,5 @@ class Tutor_Solicitud : Fragment() {
             }
         }
     }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is TutorSolicitudListener) {
-            tutorSolicitudListener = context
-        } else {
-            throw RuntimeException("$context debe implementar AlumnoProcesoListener")
-        }
-    }
-}
-interface TutorSolicitudListener {
-    fun onSolicitudActualizada()
+
 }

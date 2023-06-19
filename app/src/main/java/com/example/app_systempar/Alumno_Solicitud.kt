@@ -49,7 +49,6 @@ class Alumno_Solicitud : Fragment() {
     private var materiaSeleccionada : Int = 0
     private lateinit var id_materias : List<Int>
     private lateinit var materias : List<MateriaObject>
-    private var alumnoProcesoListener: AlumnoProcesoListener? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -248,17 +247,7 @@ class Alumno_Solicitud : Fragment() {
             }
         }
     }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is AlumnoProcesoListener) {
-            alumnoProcesoListener = context
-        } else {
-            throw RuntimeException("$context debe implementar AlumnoProcesoListener")
-        }
-    }
+
 
 }
 
-interface AlumnoProcesoListener {
-    fun onSolicitudActualizada()
-}

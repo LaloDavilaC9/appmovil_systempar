@@ -22,9 +22,8 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
-class Adaptador_Tutor(private val mContext: Context, private val listaProductos: List<SolicitudInfo>,private val texto : String) : ArrayAdapter<SolicitudInfo>(mContext, 0, listaProductos) {
+class Adaptador_Tutor(private val mContext: Context, private val lista: List<SolicitudInfo>,private val texto : String) : ArrayAdapter<SolicitudInfo>(mContext, 0, lista) {
     private val met = Metodos()
-    private var tutorSolicitudListener: TutorSolicitudListener? = null
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -33,7 +32,7 @@ class Adaptador_Tutor(private val mContext: Context, private val listaProductos:
 
 
         val binding = ListItemTutorBinding.inflate(LayoutInflater.from(mContext), parent, false)
-        val alumno = listaProductos[position]
+        val alumno = lista[position]
 
         binding.txtNombre.text = alumno.tutor_nombre_completo
         //binding.txtCo
@@ -113,6 +112,10 @@ class Adaptador_Tutor(private val mContext: Context, private val listaProductos:
                 intent.putExtra("info",alumno)
                 mContext.startActivity(intent)
             }
+            else{
+                Toast.makeText(mContext, "Ingrese a la aplicación WEB para finalizar la asesoría", Toast.LENGTH_SHORT).show()
+
+            }
 
         }
 
@@ -124,6 +127,7 @@ class Adaptador_Tutor(private val mContext: Context, private val listaProductos:
                 if (array.isNotEmpty()) {
                     jsonObject.put("quien", "tutor")
                     jsonObject.put("solicitud_id", alumno.solicitud_id)
+                    jsonObject.put("tutor_id", array[0].tutor_id)
                     //Se convierte el objeto Json a String
                     var jsonString = jsonObject.toString()
 

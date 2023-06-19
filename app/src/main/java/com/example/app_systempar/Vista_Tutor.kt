@@ -10,12 +10,14 @@ import com.example.app_systempar.databinding.ActivityVistaTutorBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class Vista_Tutor : AppCompatActivity(), TutorSolicitudListener{
+class Vista_Tutor : AppCompatActivity(){
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     //private lateinit var binding: ActivityVistaTutorBinding
     private lateinit var botonCambio : Button
     private lateinit var botonSalir : Button
+    private lateinit var botonActualizar : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //binding = ActivityVistaTutorBinding.inflate(layoutInflater)
@@ -48,11 +50,13 @@ class Vista_Tutor : AppCompatActivity(), TutorSolicitudListener{
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
+
+        botonActualizar  = findViewById(R.id.btn_actualizar2)
+        botonActualizar.setOnClickListener {
+            val intent = Intent(this,Vista_Tutor::class.java)
+            startActivity(intent)
+        }
     }
 
-    override fun onSolicitudActualizada() {
-        // Aquí puedes actualizar el fragmento Alumno_Proceso
-        val tutorSolicitudFragment = supportFragmentManager.findFragmentByTag("Tutor_Solicitud") as Tutor_Solicitud?
-        tutorSolicitudFragment?.cargarSolicitudes()
-    }
+
 }
